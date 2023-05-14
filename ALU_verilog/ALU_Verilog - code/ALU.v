@@ -1,0 +1,40 @@
+
+
+
+
+//by mohamad hossein maleki:
+
+// Project Name: alu
+
+
+module ALU(input1,input2,opCode,outputALU,zeroOutput  );
+
+	 input [15:0] input1;
+	 input [15:0] input2;
+	 input [2:0] opCode;
+	 output reg [15:0] outputALU ;
+	 output reg zeroOutput;
+	 always @(*)
+	 begin
+	 case(opCode)
+	 3'b000: outputALU = input1 + input2;
+	 3'b001: outputALU = input1 - input2;
+	 3'b010: outputALU = input1 * input2;
+	 3'b011: outputALU = input1 & input2;
+	 3'b100: outputALU = ~(input1 & input2);
+	 3'b101: outputALU = ~(input1 | input2);
+	 3'b110: outputALU = input1 ^ input2;
+	 3'b111: outputALU = ~(input1 ^ input2);
+	 default: outputALU = 16'b0;
+	 endcase
+	  
+         if(outputALU == 0)
+	    begin
+		    zeroOutput = 1'b1;
+	    end
+	 else
+	    begin
+		    zeroOutput = 1'b0;
+	    end
+	 end
+endmodule
